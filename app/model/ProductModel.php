@@ -23,11 +23,7 @@ class ProductModel {
         $stmt->bindParam(':imgUrl',$imgUrl, PDO::PARAM_STR);
         $stmt->bindParam(':state',$state,PDO::PARAM_STR);
         $stmt->execute();
-        if($stmt) {
-            return true;
-        }else {
-            return false;
-        }
+        return ($stmt) ? true : false;
     }
 
     public function deleteProduct($id) {
@@ -35,11 +31,7 @@ class ProductModel {
         $stmt = $this->dbCon->getConnection()->prepare($sql);
         $stmt->bindParam(':id',$id,PDO::PARAM_INT);
         $stmt->execute();
-        if($stmt) {
-            return true;
-        }else {
-            return false;
-        }
+        return ($stmt) ? true : false;
     }
 
     public function countProducts() {
@@ -59,6 +51,16 @@ class ProductModel {
         return $result;
     }
 
+    public function updateProduct($idProduct,$nameProduct,$statusProduct,$imgProduct) {
+        $sql = "UPDATE product SET nameProduct = :nameProduct, statusProduct = :statusProduct, imgProduct = :imgProduct WHERE idProduct = :idProduct";
+        $stmt = $this->dbCon->getConnection()->prepare($sql);
+        $stmt->bindParam(':idProduct',$idProduct,PDO::PARAM_INT);
+        $stmt->bindParam(':nameProduct',$nameProduct,PDO::PARAM_STR);
+        $stmt->bindParam(':statusProduct',$statusProduct,PDO::PARAM_STR);
+        $stmt->bindParam(':imgProduct',$imgProduct,PDO::PARAM_STR);
+        $stmt->execute();
+        return ($stmt) ? true : false;
+    }
 }
 
 ?>

@@ -5,14 +5,17 @@
 
 if(isset($_GET['id'])){
   include_once '../../../app/controller/ProductController.php';
-   $controller = new ProviderController();
-   $id = $_GET['id'];
+  $id = $_GET['id'];
+    $productController = new ProductController();
+    $product = $productController->getProduct($id);
+    $name = $product['nameProduct'];
+    $state = $product['statusProduct'];
+    $imgUrl = $product['imgProduct'];
  }else {
    $id = 0;
-   $dateRegister = date('Y-m-d');
+   $name = '';
    $state = 'all';
-   $categories = 'all';
-   $providers = 'all';
+   $imgUrl = 'all';
  }
 ?>
 
@@ -62,7 +65,7 @@ if(isset($_GET['id'])){
          <div class="row">
              <h4 class="col-auto">Fecha de registro:</h4>
              <h4 class="col-auto"><?php
-                 echo $dateRegister;
+                 echo date('d/m/Y');
                  ?> <?php
                  ?>
              </h4>
@@ -71,7 +74,7 @@ if(isset($_GET['id'])){
 </div>
 <hr>
 </div>
-<form class="row" action="../../../app/controller/ProductController.php<?= ($id!=0)?'?id='.$id:''; ?>" method="POST" enctype="multipart/form-data" >
+<form class="row" action="../../../app/controller/ProductController.php<?= ($id!=0)?'?id='.$id.'&imgUrl='.$imgUrl:''; ?>" method="POST" enctype="multipart/form-data" >
 <!--  Nombre -->
 <div class="col-md-6">
    <label for="nameProduct" class="form-label">Nombre</label>
@@ -90,14 +93,9 @@ if(isset($_GET['id'])){
  <div class="col-md-12" style="height:400px;">
     <h4 class="text-center pt-2">Solo se debe subir una imagen</h4>
     <hr>
-    <input class="form-control mb-2" type="file" id="imageInput" name="imgProduct" accept="image/*"  multiple>
-    <div class="container mt-2 pt-2 pb-2" style="height:260px; background-color:var(--bs-tertiary-bg);">
-        <div class="card" style="width: 16rem; display:none;">
-            <img id="imgShow" class="mx-auto d-block card-img-top" src="" alt="">
-          <div class="card-body text-center">
-            <a id="eliminarBtn" href="#" class="btn btn-outline-danger">Eliminar</a>
-          </div>
-        </div>
+    <input class="form-control mb-2" type="file" id="imageInput" name="imgProduct" accept="image/*" multiple>
+    <div class="container mt-2 pt-4 pb-2" style="height:180px; background-color:var(--bs-tertiary-bg);">
+        <img id="imgShow" class="img-fluid float-start rounded mx-auto d-block" src="<?=($id!=0)?$imgUrl:''?>" alt=""  style="width: 16rem; display:<?=($id!=0)?"block":"none;"?>">
     </div>
     <hr>
  </div>
@@ -114,7 +112,7 @@ if(isset($_GET['id'])){
          ?>
  </button>
  <a class="col-3 btn btn-outline-secondary"  href="../../../public/index.php">
- <i class="bi bi-arrow-left-circle"></i> Cerrar
+ <i class="bi bi-arrow-left-circle"></i> Cancelar
  </a>
 </div>
 </form>
@@ -135,21 +133,21 @@ if(isset($_GET['id'])){
             reader.onload = function(e) { // Cuando se cargue el archivo, se ejecutará esta función
                 imagenMostrada.src = e.target.result; // Establece el atributo src de la imagen en la ruta del archivo
                 console.log(imagenMostrada.src)
-                tarjeta.style.display = 'block'; // Muestra la tarjeta cuando se carga una imagen
+                // tarjeta.style.display = 'block'; // Muestra la tarjeta cuando se carga una imagen
             };
 
             reader.readAsDataURL(file);
         }
     });
 
-    $(document).ready(function() {
-        $("#eliminarBtn").click(function(e) {
-            e.preventDefault(); // Evita el comportamiento predeterminado del enlace
-            imagenMostrada.src = ''; // Establece el atributo src en blanco para eliminar la imagen
-            imageInput.value = ''; // Establece el valor del campo de entrada de archivos en blanco para que no se envíe ningún archivo
-            tarjeta.style.display = 'none'; // Oculta la tarjeta al hacer clic en el botón "Eliminar"
-        });
-    });
+    // $(document).ready(function() {
+    //     $("#eliminarBtn").click(function(e) {
+    //         e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+    //         imagenMostrada.src = ''; // Establece el atributo src en blanco para eliminar la imagen
+    //         imageInput.value = ''; // Establece el valor del campo de entrada de archivos en blanco para que no se envíe ningún archivo
+    //         tarjeta.style.display = 'none'; // Oculta la tarjeta al hacer clic en el botón "Eliminar"
+    //     });
+    // });
 </script>
 
 <!-- Bootstrap JavaScript Libraries -->  

@@ -68,7 +68,7 @@
             </span>
           </td>
           <td class="align-middle">
-              <a href="../app/controller/ProductController.php?" class="col me-2 btn btn-outline-secondary"><i class="bi bi-pencil" >
+              <a href="../app/views/products/FormProduct.php?id=<?=$product['idProduct']?>" class="col me-2 btn btn-outline-secondary"><i class="bi bi-pencil" >
               </i> Editar</a>
             </td>
           <td class="align-middle">
