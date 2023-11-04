@@ -28,8 +28,37 @@ class ProductModel {
         }else {
             return false;
         }
-
     }
+
+    public function deleteProduct($id) {
+        $sql = "DELETE FROM product WHERE idProduct = :id";
+        $stmt = $this->dbCon->getConnection()->prepare($sql);
+        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        $stmt->execute();
+        if($stmt) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public function countProducts() {
+        $sql = "SELECT COUNT(*) FROM product";
+        $stmt = $this->dbCon->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchColumn();
+        return $result;
+    }
+
+    public function getProduct($id) {
+        $sql = "SELECT * FROM product WHERE idProduct = :id";
+        $stmt = $this->dbCon->getConnection()->prepare($sql);
+        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
 
 ?>

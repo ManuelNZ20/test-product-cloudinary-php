@@ -19,7 +19,7 @@
 <!-- main -->
 <main class="container pt-4">
     <?php
-      include '../app/controller/ProductController.php';
+      require '../app/controller/ProductController.php';
       $productController = new ProductController();
 
     ?>
@@ -32,7 +32,7 @@
     </div>
   <div class="row justify-content-between">
     <h4 class="col"><span class="">Productos</span></h4>
-    <h4 class="col text-end"><i class="bi bi-box"></i> N° <?= count($productController->getProducts()) ?></h4>
+    <h4 class="col text-end"><i class="bi bi-box"></i> N° <?= $productController->countProducts(); ?></h4>
   </div>
   <hr>
   <!-- table products -->
@@ -68,15 +68,14 @@
             </span>
           </td>
           <td class="align-middle">
-              <a href="" class="col me-2 btn btn-outline-secondary"><i class="bi bi-pencil" >
+              <a href="../app/controller/ProductController.php?" class="col me-2 btn btn-outline-secondary"><i class="bi bi-pencil" >
               </i> Editar</a>
             </td>
           <td class="align-middle">
-            <form action="" method="POST">
+            <form action="../app/controller/ProductController.php?id=<?=$product['idProduct']?>" method="POST">
              <button class="col me-2 btn btn-outline-secondary" name="btnDelete" ><i class="bi bi-trash3"></i> Eliminar
             </button>
             </form>
-          <!-- ../../../app/views/admin/FormProvider.php -->
           </td>
         </tr>
         <?php
