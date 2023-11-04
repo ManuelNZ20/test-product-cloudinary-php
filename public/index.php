@@ -52,19 +52,19 @@
           foreach($productController->getProducts() as $product) {
         ?>
         <tr class=" ">
-          <th class="align-middle" scope="row">1</th>
+          <th class="align-middle" scope="row"><?=$product['idProduct']?></th>
           <td class="text-truncate align-middle">
             <span class="d-inline-block text-truncate"  style="max-width: 150px;">
             <?= $product['nameProduct']; ?>
             </span>
           </td>
           <td class="align-middle">
-            <img class="rounded max-auto d-block" src="<?= $product['imgProduct'] ?>" alt="imagen" style="border-radius:10px; width:120px;">
+            <img class="rounded max-auto d-block" src="<?= $product['imgProduct'] ?>" alt="imagen" style="border-radius:10px; width:120px; height:120px;">
           </td>
           
           <td  class="align-middle" >
             <span class="d-inline-block text-truncate"  style="max-width: 150px;">
-              <?= $product['stateProduct']; ?>
+              <?= $product['statusProduct']; ?>
             </span>
           </td>
           <td class="align-middle">

@@ -19,9 +19,9 @@ class ProductModel {
     public function createProduct($name,$state,$imgUrl) {
         $sql = "INSERT INTO product (nameProduct,imgProduct,statusProduct) VALUES (:name,:imgUrl,:state)";
         $stmt = $this->dbCon->getConnection()->prepare($sql);
-        $stmt->bindParam(':nameProduct',$name,PDO::PARAM_STR);
-        $stmt->bindParam(':imgProduct',$imgUrl, PDO::PARAM_STR);
-        $stmt->bindParam(':statusProduct',$state,PDO::PARAM_STR);
+        $stmt->bindParam(':name',$name,PDO::PARAM_STR);
+        $stmt->bindParam(':imgUrl',$imgUrl, PDO::PARAM_STR);
+        $stmt->bindParam(':state',$state,PDO::PARAM_STR);
         $stmt->execute();
         if($stmt) {
             return true;
